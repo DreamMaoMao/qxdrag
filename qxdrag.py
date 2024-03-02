@@ -10,7 +10,8 @@ import gi
 
 def get_icon_path(file_path):
     mime_type, _ = mimetypes.guess_type(file_path)    
- 
+    if mime_type == None:
+        mime_type = "inode/directory"
     gi.require_version("Gtk", "3.0")
     from gi.repository import Gtk, Gio
     icon_theme = Gtk.IconTheme.get_default()
@@ -25,6 +26,7 @@ def get_icon_path(file_path):
         if image_file:
             break
     return image_file    
+
 
 class MyListWidget(QListWidget):
     global args
@@ -65,6 +67,17 @@ class Window(QWidget):
         self.file_path = args.path
         self.initUI()
 
+    def set_item(self,file_path):
+        if args.basename:
+            show_path = os.path.basename(file_path)
+        else:
+            show_path = file_path
+        self.listWidget.addItem(show_path)
+        item = self.listWidget.item(self.listWidget.count()-1)
+        item.setData(Qt.UserRole,file_path)
+        icon = QIcon(get_icon_path(file_path))
+        item.setIcon(icon)
+
     def initUI(self):
         style = """
             QWidget {
@@ -104,20 +117,16 @@ class Window(QWidget):
         """
         self.setStyleSheet(style)
         self.listWidget = MyListWidget()
-        if args.basename:
-            show_path = os.path.basename(self.file_path)
+        if args.expand and os.path.isdir(self.file_path):
+            files = os.listdir(self.file_path)            
+            for file in files:
+                self.set_item(self.file_path+"/"+file)
         else:
-            show_path = self.file_path
+            self.set_item(self.file_path)
 
-        self.listWidget.addItem(show_path)
-
-        item = self.listWidget.item(self.listWidget.count()-1)
-        item.setData(Qt.UserRole,self.file_path)
-        icon = QIcon(get_icon_path(self.file_path))
-        item.setIcon(icon)
         # print()
         # 设置可以拖拽
-        self.listWidget.setDragEnabled(True)
+        # self.listWidget.setDragEnabled(True)
 
         vbox = QVBoxLayout()
         vbox.addWidget(self.listWidget)
@@ -129,8 +138,9 @@ if __name__ == "__main__":
     parser.add_argument('-x', '--and-exit', action='store_true', help='exit after first successful drag or drop')
     parser.add_argument('-b', '--basename', action='store_true', help='Always show basename of each file')
     parser.add_argument('-w', '--width', type=int, help='window width', default=400)
-    parser.add_argument('-e', '--height', type=int, help='window height',default=300)
+    parser.add_argument('-t', '--height', type=int, help='window height',default=300)
     parser.add_argument('-p', '--path', type=str, help='file full path')
+    parser.add_argument('-e', '--expand', action='store_true', help='generate all file to item in folder')
 
     args = parser.parse_args()
 
