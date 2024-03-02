@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from PyQt5.QtWidgets import QApplication, QWidget, QListWidget,QVBoxLayout
-from PyQt5.QtCore import Qt, QMimeData, QUrl
+from PyQt5.QtCore import Qt, QMimeData, QUrl,QSize
 from PyQt5.QtGui import QDrag,QPixmap,QCursor,QPainter,QIcon
 import sys,os
 import argparse
@@ -15,6 +15,8 @@ def get_icon_path(file_path):
     if mime_type == None:
         mime_type = "inode/directory"
 
+    if "image" in mime_type:
+        return file_path
     icon_theme = Gtk.IconTheme.get_default()
     icon = Gio.content_type_get_icon(mime_type)
     image_file = None
@@ -78,6 +80,7 @@ class Window(QWidget):
         item.setData(Qt.UserRole,file_path)
         icon = QIcon(get_icon_path(file_path))
         item.setIcon(icon)
+        self.listWidget.setIconSize(QSize(args.size,args.size))
 
     def initUI(self):
         style = """
@@ -137,6 +140,7 @@ if __name__ == "__main__":
     parser.add_argument('-t', '--height', type=int, help='window height',default=300)
     parser.add_argument('-p', '--path', type=str, help='file full path')
     parser.add_argument('-e', '--expand', action='store_true', help='generate all file to item in folder')
+    parser.add_argument('-s', '--size', type=int, help='icon size', default=64)
 
     args = parser.parse_args()
 

@@ -17,6 +17,8 @@ https://github.com/DreamMaoMao/qxdrag/assets/30348075/290c8f8a-acda-49ec-bb51-1d
 '-t', '--height', type=int, help='window height',default=300
 '-p', '--path', type=str, help='dir full path'
 '-e', '--expand', action='store_true', help='generate all file to item in folder'
+'-s', '--size', type=int, help='icon size', default=64
+
 ```
 
 # example:
