@@ -11,11 +11,11 @@ https://github.com/DreamMaoMao/qxdrag/assets/30348075/290c8f8a-acda-49ec-bb51-1d
 
 
 ```conf
-'-x', '--and-exit', action='store_true', help='exit after first successful drag ordrop'
-'-b', '--basename', action='store_true', help='Always show basename of each file'
+'-x', '--and-exit', action='store_true', help='exit after first successful drag to open'
+'-b', '--basename', action='store_true', help='only show basename of each file'
 '-w', '--width', type=int, help='window width', default=400
 '-t', '--height', type=int, help='window height',default=300
-'-p', '--path', type=str, help='file full path'
+'-p', '--path', type=str, help='dir full path'
 '-e', '--expand', action='store_true', help='generate all file to item in folder'
 ```
 
