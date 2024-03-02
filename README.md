@@ -1,6 +1,13 @@
 # qxdrag
 base pyqt5,generate file-list gui from cli which can open in target app
 
+
+
+https://github.com/DreamMaoMao/qxdrag/assets/30348075/290c8f8a-acda-49ec-bb51-1d6d0006d4ad
+
+
+
+
 ```conf
 '-x', '--and-exit', action='store_true', help='exit after first successful drag ordrop'
 '-b', '--basename', action='store_true', help='Always show basename of each file'
