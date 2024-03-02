@@ -2,10 +2,29 @@
 # -*- coding: utf-8 -*-
 from PyQt5.QtWidgets import QApplication, QWidget, QListWidget,QVBoxLayout
 from PyQt5.QtCore import Qt, QMimeData, QUrl
-from PyQt5.QtGui import QDrag,QPixmap,QCursor,QPainter
+from PyQt5.QtGui import QDrag,QPixmap,QCursor,QPainter,QIcon
 import sys,os
 import argparse
+import mimetypes
+import gi
 
+def get_icon_path(file_path):
+    mime_type, _ = mimetypes.guess_type(file_path)    
+ 
+    gi.require_version("Gtk", "3.0")
+    from gi.repository import Gtk, Gio
+    icon_theme = Gtk.IconTheme.get_default()
+    icon = Gio.content_type_get_icon(mime_type)
+    image_file = None
+    for entry in icon.to_string().split():
+        if entry != "." and entry != "GThemedIcon":
+            try:
+                image_file = icon_theme.lookup_icon(entry, 32, 0).get_filename()
+            except:
+                pass
+        if image_file:
+            break
+    return image_file    
 
 class MyListWidget(QListWidget):
     global args
@@ -21,6 +40,8 @@ class MyListWidget(QListWidget):
         mime_data.setUrls([QUrl.fromLocalFile(item.data(Qt.UserRole))])
         drag = QDrag(self)
         drag.setMimeData(mime_data)
+
+        # generate a pixmap to follow mouse move
         pixmap = QPixmap(self.viewport().visibleRegion().boundingRect().size())
         pixmap.fill(Qt.transparent)
         painter = QPainter()
@@ -92,7 +113,9 @@ class Window(QWidget):
 
         item = self.listWidget.item(self.listWidget.count()-1)
         item.setData(Qt.UserRole,self.file_path)
-
+        icon = QIcon(get_icon_path(self.file_path))
+        item.setIcon(icon)
+        # print()
         # 设置可以拖拽
         self.listWidget.setDragEnabled(True)
 
