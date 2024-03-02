@@ -10,12 +10,13 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gio
 
-def get_icon_path(file_path):
+
+def get_icon_path(file_path,from_dir):
     mime_type, _ = mimetypes.guess_type(file_path)    
     if mime_type == None:
         mime_type = "inode/directory"
 
-    if "image" in mime_type:
+    if "image" in mime_type and not from_dir:
         return file_path
     icon_theme = Gtk.IconTheme.get_default()
     icon = Gio.content_type_get_icon(mime_type)
@@ -70,7 +71,7 @@ class Window(QWidget):
         self.file_path = args.path
         self.initUI()
 
-    def set_item(self,file_path):
+    def set_item(self,file_path,from_dir):
         if args.basename:
             show_path = os.path.basename(file_path)
         else:
@@ -78,7 +79,7 @@ class Window(QWidget):
         self.listWidget.addItem(show_path)
         item = self.listWidget.item(self.listWidget.count()-1)
         item.setData(Qt.UserRole,file_path)
-        icon = QIcon(get_icon_path(file_path))
+        icon = QIcon(get_icon_path(file_path,from_dir))
         item.setIcon(icon)
         self.listWidget.setIconSize(QSize(args.size,args.size))
 
@@ -124,9 +125,9 @@ class Window(QWidget):
         if args.expand and os.path.isdir(self.file_path):
             files = os.listdir(self.file_path)            
             for file in files:
-                self.set_item(self.file_path+"/"+file)
+                self.set_item(self.file_path+"/"+file,True)
         else:
-            self.set_item(self.file_path)
+            self.set_item(self.file_path,False)
 
         vbox = QVBoxLayout()
         vbox.addWidget(self.listWidget)
