@@ -124,10 +124,6 @@ class Window(QWidget):
         else:
             self.set_item(self.file_path)
 
-        # print()
-        # 设置可以拖拽
-        # self.listWidget.setDragEnabled(True)
-
         vbox = QVBoxLayout()
         vbox.addWidget(self.listWidget)
         self.setLayout(vbox)
