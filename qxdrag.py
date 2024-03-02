@@ -97,11 +97,11 @@ class Window(QWidget):
                 font-size: 25px;
             }
             QListWidget::item {
-                background-color:#333;
+                background-color:#57340c;
                 color: #ecd4ac;
                 border-style: none;
                 border-radius: 10px;
-                border-bottom: 5px solid #191818;
+                border-bottom: 5px solid #2a1803;
                 margin-bottom: 3px;
 
             }
