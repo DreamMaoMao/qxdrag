@@ -7,13 +7,14 @@ import sys,os
 import argparse
 import mimetypes
 import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk, Gio
 
 def get_icon_path(file_path):
     mime_type, _ = mimetypes.guess_type(file_path)    
     if mime_type == None:
         mime_type = "inode/directory"
-    gi.require_version("Gtk", "3.0")
-    from gi.repository import Gtk, Gio
+
     icon_theme = Gtk.IconTheme.get_default()
     icon = Gio.content_type_get_icon(mime_type)
     image_file = None
@@ -127,7 +128,6 @@ class Window(QWidget):
         vbox = QVBoxLayout()
         vbox.addWidget(self.listWidget)
         self.setLayout(vbox)
-        self.listWidget.show()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='generate drag file gui from cli')
@@ -142,7 +142,6 @@ if __name__ == "__main__":
 
     app = QApplication(sys.argv)
     window = Window()
-    # window.setGeometry(50, 50, 50, 50)
     window.resize(args.width,args.height)
     window.show()
     sys.exit(app.exec_())
