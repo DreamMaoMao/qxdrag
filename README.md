@@ -20,3 +20,6 @@ QT_QPA_PLATFORM=xcb ~/tool/qxdrag.py -x -e -b -p ~/Images/hello.jpg
 ```shell
 QT_QPA_PLATFORM=wayland ~/tool/qxdrag.py -x -e -b -p ~/Images/hello.jpg
 ```
+
+### property
+x11 class: qxdrag.py
