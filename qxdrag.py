@@ -136,7 +136,7 @@ class Window(QWidget):
         self.listWidget = MyListWidget()
         if args.expand and os.path.isdir(self.file_path):
             files = os.listdir(self.file_path)    
-            if platform.system() == "Windows":
+            if not platform.system() == "Windows":
                 split_str = "/"
             else:
                 split_str = "\\"        
