@@ -5,11 +5,11 @@ base pyqt5,generate file-list gui from cli which can open in target app.
 it should be work both in linux,windows and macos. but i haven't test in macos.
 
 
-## linux
+## Linux
 
 https://github.com/DreamMaoMao/qxdrag/assets/30348075/290c8f8a-acda-49ec-bb51-1d6d0006d4ad
 
-## window
+## Windows
 
 https://github.com/DreamMaoMao/qxdrag/assets/30348075/7a900e6a-8f4c-4695-9da9-03fac2c020a0
 
