@@ -14,9 +14,12 @@ https://github.com/DreamMaoMao/qxdrag/assets/30348075/290c8f8a-acda-49ec-bb51-1d
 https://github.com/DreamMaoMao/qxdrag/assets/30348075/7a900e6a-8f4c-4695-9da9-03fac2c020a0
 
 # Dependent
-- python3
-- pyqt >= pyqt5.15.10 and < pyqt6 
+pyqt(>= pyqt5.15.10 and < pyqt6) 
 
+```
+sudo pacman -S python3
+sudo pacman -S python-pyqt5 
+```
 
 ```conf
 '-x', '--and-exit', action='store_true', help='exit after first successful drag to open'
