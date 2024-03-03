@@ -4,7 +4,6 @@ Since [dragon](https://github.com/mwh/dragon) and [ripdrag](https://github.com/n
 base pyqt5,generate file-list gui from cli which can open in target app.
 it should be work both in linux,windows and macos. but i haven't test in macos.
 
-It works perfectly in x11 and xwayland modes, but in wayland mode there is a little problem, which is that if you enable the auto exit option, it requires you to click once the window to exit after finish drag.
 
 ## linux
 
@@ -16,7 +15,7 @@ https://github.com/DreamMaoMao/qxdrag/assets/30348075/7a900e6a-8f4c-4695-9da9-03
 
 # Dependent
 - python3
-- pyqt5
+- pyqt >= pyqt5.15.10 and < pyqt6 
 
 
 ```conf
