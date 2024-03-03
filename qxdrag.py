@@ -6,10 +6,15 @@ from PyQt5.QtGui import QDrag,QPixmap,QCursor,QPainter,QIcon
 import sys,os
 import argparse
 import mimetypes
-import gi
-gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gio
+import platform
 
+
+def islinux():
+    pstr = platform.system()
+    if pstr == "Linux":
+        return True
+    else:
+        return False
 
 def get_icon_path(file_path,from_dir):
     mime_type, _ = mimetypes.guess_type(file_path)    
@@ -18,18 +23,25 @@ def get_icon_path(file_path,from_dir):
 
     if "image" in mime_type and not from_dir:
         return file_path
-    icon_theme = Gtk.IconTheme.get_default()
-    icon = Gio.content_type_get_icon(mime_type)
-    image_file = None
-    for entry in icon.to_string().split():
-        if entry != "." and entry != "GThemedIcon":
-            try:
-                image_file = icon_theme.lookup_icon(entry, 32, 0).get_filename()
-            except:
-                pass
-        if image_file:
-            break
-    return image_file    
+    
+    elif islinux() :
+        import gi
+        gi.require_version("Gtk", "3.0")
+        from gi.repository import Gtk, Gio
+        icon_theme = Gtk.IconTheme.get_default()
+        icon = Gio.content_type_get_icon(mime_type)
+        image_file = None
+        for entry in icon.to_string().split():
+            if entry != "." and entry != "GThemedIcon":
+                try:
+                    image_file = icon_theme.lookup_icon(entry, 32, 0).get_filename()
+                except:
+                    pass
+            if image_file:
+                break
+        return image_file    
+    else:
+        return None
 
 
 class MyListWidget(QListWidget):
@@ -123,9 +135,13 @@ class Window(QWidget):
         self.setStyleSheet(style)
         self.listWidget = MyListWidget()
         if args.expand and os.path.isdir(self.file_path):
-            files = os.listdir(self.file_path)            
+            files = os.listdir(self.file_path)    
+            if platform.system() == "Windows":
+                split_str = "/"
+            else:
+                split_str = "\\"        
             for file in files:
-                self.set_item(self.file_path+"/"+file,True)
+                self.set_item(self.file_path+split_str+file,True)
         else:
             self.set_item(self.file_path,False)
 
