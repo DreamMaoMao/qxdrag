@@ -18,7 +18,9 @@ pyqt(>= pyqt5.15.10 and < pyqt6)
 
 ```
 sudo pacman -S python3
-sudo pacman -S python-pyqt5 
+sudo pacman -S python-pyqt5
+pip install pycairo
+pip install PyGObject
 ```
 
 ```conf
