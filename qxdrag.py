@@ -167,5 +167,6 @@ if __name__ == "__main__":
     window_x = desktop.availableGeometry().x() + int(desktop.availableGeometry().width()/2) - int(args.width/2)
     window_y = desktop.availableGeometry().y() + int(desktop.availableGeometry().height()/2) - int(args.height/2)
     window.setGeometry(window_x,window_y,args.width,args.height)
+    window.setWindowFlags(Qt.Dialog)
     window.show()
     sys.exit(app.exec_())
