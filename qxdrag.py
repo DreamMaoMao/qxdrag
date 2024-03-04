@@ -155,7 +155,7 @@ if __name__ == "__main__":
     parser.add_argument('-b', '--basename', action='store_true', help='Always show basename of each file')
     parser.add_argument('-w', '--width', type=int, help='window width', default=400)
     parser.add_argument('-t', '--height', type=int, help='window height',default=300)
-    parser.add_argument('-p', '--path', type=str, help='file full path')
+    parser.add_argument('-p', '--path', type=str, help='file full path',default=os.environ["HOME"])
     parser.add_argument('-e', '--expand', action='store_true', help='generate all file to item in folder')
     parser.add_argument('-s', '--size', type=int, help='icon size', default=64)
 
