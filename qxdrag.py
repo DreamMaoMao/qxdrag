@@ -163,6 +163,9 @@ if __name__ == "__main__":
 
     app = QApplication(sys.argv)
     window = Window()
-    window.resize(args.width,args.height)
+    desktop = QApplication.desktop()
+    window_x = desktop.x() + int(desktop.width()/2) - args.width
+    window_y = desktop.y() + int(desktop.height()/2) - args.height
+    window.setGeometry(window_x,window_y,args.width,args.height)
     window.show()
     sys.exit(app.exec_())
