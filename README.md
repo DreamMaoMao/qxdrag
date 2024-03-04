@@ -1,4 +1,7 @@
 # qxdrag
+![image](https://github.com/DreamMaoMao/qxdrag/assets/30348075/d794714e-1519-4439-8b84-3d1a0bc9b748)
+
+
 Since [dragon](https://github.com/mwh/dragon) and [ripdrag](https://github.com/nik012003/ripdrag) can't drag files to the Xwayland window under the latest hyprland, I decided to write one by myself.
 
 base pyqt5,generate file-list gui from cli which can open in target app.
