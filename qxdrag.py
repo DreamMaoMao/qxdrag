@@ -132,6 +132,7 @@ class Window(QWidget):
             }
              
         """
+        self.setWindowTitle('qxdrag')
         self.setStyleSheet(style)
         self.listWidget = MyListWidget()
         if args.expand and os.path.isdir(self.file_path):
