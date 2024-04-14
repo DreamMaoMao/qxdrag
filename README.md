@@ -11,10 +11,10 @@ it should be work both in linux,windows and macos. but i haven't test in macos.
 
 https://github.com/DreamMaoMao/qxdrag/assets/30348075/290c8f8a-acda-49ec-bb51-1d6d0006d4ad
 
+- yazi-config: keymap.toml
 ```toml
-	{ on = [ "u","f" ], run = '''shell ' QT_QPA_PLATFORM=xcb ~/deskenv/master/qxdrag/qxdrag.py -x -e -b -p "$1"' --confirm''',desc="dragon x11" },
-	{ on = [ "u","w" ], run = '''shell ' QT_QPA_PLATFORM=wayland ~/deskenv/master/qxdrag/qxdrag.py -x -e -b -p "$1"' --confirm''',desc="dragon wayland" },
-
+{ on = [ "u","f" ], run = '''shell ' QT_QPA_PLATFORM=xcb ~/deskenv/master/qxdrag/qxdrag.py -x -e -b -p "$1"' --confirm''',desc="dragon x11" },
+{ on = [ "u","w" ], run = '''shell ' QT_QPA_PLATFORM=wayland ~/deskenv/master/qxdrag/qxdrag.py -x -e -b -p "$1"' --confirm''',desc="dragon wayland" },
 ```
 
 
@@ -22,9 +22,10 @@ https://github.com/DreamMaoMao/qxdrag/assets/30348075/290c8f8a-acda-49ec-bb51-1d
 
 https://github.com/DreamMaoMao/qxdrag/assets/30348075/7a900e6a-8f4c-4695-9da9-03fac2c020a0
 
-```toml
-	{ on = [ "u","f" ], run = '''shell 'python D:/tool/qxdrag/qxdrag.py -x -e -b -p "%1"' --confirm''',desc="qxdrag" },
+- yazi-config: keymap.toml
 
+```toml
+{ on = [ "u","f" ], run = '''shell 'python D:/tool/qxdrag/qxdrag.py -x -e -b -p "%1"' --confirm''',desc="qxdrag" },
 ```
 
 
