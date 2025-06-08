@@ -58,23 +58,22 @@ class MyListWidget(QListWidget):
         mime_data.setUrls([QUrl.fromLocalFile(item.data(Qt.UserRole))])
         drag = QDrag(self)
         drag.setMimeData(mime_data)
-
-        # generate a pixmap to follow mouse move
-        pixmap = QPixmap(self.viewport().visibleRegion().boundingRect().size())
-        pixmap.fill(Qt.transparent)
-        painter = QPainter()
-        painter.begin(pixmap)
-        rect = self.visualRect(self.indexFromItem(item))
-        painter.drawPixmap(rect, self.viewport().grab(rect))
-        painter.end()
-        drag.setPixmap(pixmap)
-        drag.setHotSpot(self.viewport().mapFromGlobal(QCursor.pos()))
-        # when release button,copy file and exit
-        
+    
+        # 只使用图标创建pixmap
+        icon = item.icon()
+        if not icon.isNull():
+            pixmap = icon.pixmap(QSize(args.size, args.size))
+            # 调整pixmap大小
+            if pixmap.width() > 128 or pixmap.height() > 128:
+                pixmap = pixmap.scaled(128, 128, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            drag.setPixmap(pixmap)
+            # 设置热点在图标中心
+            drag.setHotSpot(pixmap.rect().center())
+    
+        # 当释放按钮时，复制文件并退出
         drag.exec_(Qt.CopyAction)
         if args.and_exit:
             sys.exit()
-
 
 class Window(QWidget):
     global args
