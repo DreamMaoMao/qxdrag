@@ -58,6 +58,11 @@ class MyListWidget(QListWidget):
         mime_data.setUrls([QUrl.fromLocalFile(item.data(Qt.UserRole))])
         drag = QDrag(self)
         drag.setMimeData(mime_data)
+
+        # 设置拖拽时的光标样式（Linux 下通常会自动应用，但可以手动指定）
+        cursor = QCursor(Qt.ClosedHandCursor)
+        QApplication.setOverrideCursor(cursor)
+        drag.setDragCursor(cursor.pixmap(), Qt.CopyAction)
     
         # 只使用图标创建pixmap
         icon = item.icon()
